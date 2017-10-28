@@ -58,8 +58,8 @@
            <string>Ajouter</string>
           </property>
           <property name="icon">
-           <iconset resource="globalformressources.qrc">
-            <normaloff>:/global/add22.png</normaloff>:/global/add22.png</iconset>
+           <iconset resource="formmain.qrc">
+            <normaloff>:/FormMain/add22.png</normaloff>:/FormMain/add22.png</iconset>
           </property>
          </widget>
         </item>
@@ -69,8 +69,8 @@
            <string>Modifier</string>
           </property>
           <property name="icon">
-           <iconset resource="globalformressources.qrc">
-            <normaloff>:/global/edit22.png</normaloff>:/global/edit22.png</iconset>
+           <iconset resource="formmain.qrc">
+            <normaloff>:/FormMain/edit22.png</normaloff>:/FormMain/edit22.png</iconset>
           </property>
          </widget>
         </item>
@@ -80,8 +80,8 @@
            <string>Supprimer</string>
           </property>
           <property name="icon">
-           <iconset resource="globalformressources.qrc">
-            <normaloff>:/global/Delete22.png</normaloff>:/global/Delete22.png</iconset>
+           <iconset resource="formmain.qrc">
+            <normaloff>:/FormMain/Delete22.png</normaloff>:/FormMain/Delete22.png</iconset>
           </property>
          </widget>
         </item>
@@ -124,9 +124,16 @@
     <property name="title">
      <string>&amp;Fichier</string>
     </property>
-    <addaction name="action_Quitter"/>
+    <addaction name="action_Quit"/>
+   </widget>
+   <widget class="QMenu" name="menu_Aide">
+    <property name="title">
+     <string>&amp;Aide</string>
+    </property>
+    <addaction name="action_About"/>
    </widget>
    <addaction name="menu_Fichier"/>
+   <addaction name="menu_Aide"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -137,9 +144,14 @@
    </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
-  <action name="action_Quitter">
+  <action name="action_Quit">
    <property name="text">
     <string>&amp;Quitter</string>
+   </property>
+  </action>
+  <action name="action_About">
+   <property name="text">
+    <string>À &amp;propos</string>
    </property>
   </action>
  </widget>
@@ -150,7 +162,7 @@
  </resources>
  <connections>
   <connection>
-   <sender>action_Quitter</sender>
+   <sender>action_Quit</sender>
    <signal>triggered()</signal>
    <receiver>FormMainClass</receiver>
    <slot>close()</slot>

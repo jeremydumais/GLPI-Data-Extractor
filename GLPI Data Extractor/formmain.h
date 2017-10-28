@@ -16,6 +16,9 @@ private:
 	Ui::FormMainClass ui;
 private slots:
 	void pushButtonExecute_Click();
+	void pushButtonAbout_Click();
+	void pushButtonAddJob_Click();
+	void pushButtonUpdateJob_Click();
 };
 
 #endif // FORMMAIN_H

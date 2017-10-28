@@ -1,4 +1,6 @@
 #include "formmain.h"
+#include "formabout.h"
+#include "formjobmanagement.h"
 #include "wkhtmltox\pdf.h"
 #define HAVE_STRUCT_TIMESPEC
 #include "pthread.h"
@@ -12,7 +14,10 @@ FormMain::FormMain(QWidget *parent)
 	ui.tableWidget->setColumnWidth(0, 200);
 	ui.tableWidget->setColumnWidth(1, 150);
 	ui.progressBarExecution->setVisible(false);
+	connect(ui.pushButton_AddJob, SIGNAL(clicked()), this, SLOT(pushButtonAddJob_Click()));
+	connect(ui.pushButton_UpdateJob, SIGNAL(clicked()), this, SLOT(pushButtonUpdateJob_Click()));
 	connect(ui.pushButtonExecute, SIGNAL(clicked()), this, SLOT(pushButtonExecute_Click()));
+	connect(ui.action_About, SIGNAL(triggered()), this, SLOT(pushButtonAbout_Click()));
 }
 
 FormMain::~FormMain()
@@ -32,4 +37,28 @@ void FormMain::pushButtonExecute_Click()
 	wkhtmltopdf_convert(converter);
 	wkhtmltopdf_destroy_converter(converter);
 	wkhtmltopdf_deinit();
+}
+
+void FormMain::pushButtonAbout_Click()
+{
+	FormAbout formAbout(this);
+	formAbout.exec();
+}
+
+void FormMain::pushButtonAddJob_Click()
+{
+	FormJobManagement formJobManagement(this);
+	if (formJobManagement.exec() == QDialog::Accepted)
+	{
+		
+	}
+}
+
+void FormMain::pushButtonUpdateJob_Click()
+{
+	FormJobManagement formJobManagement(this, FormManagementType::Update);
+	if (formJobManagement.exec() == QDialog::Accepted)
+	{
+
+	}
 }

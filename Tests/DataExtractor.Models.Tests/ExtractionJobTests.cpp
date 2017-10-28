@@ -44,5 +44,67 @@ namespace DataExtractorModelsTests
 			Assert::ExpectException<invalid_argument>(f1);
 		}
 
+		TEST_METHOD(GetTicketCountZero)
+		{
+			ExtractionJob job("Job");
+			Assert::AreEqual(static_cast<size_t>(0), job.getTicketsCount());
+		}
+
+		TEST_METHOD(AddOneTicketToJob)
+		{
+			ExtractionJob job("Job");
+			job.addTicketId(12345);
+			Assert::AreEqual(static_cast<size_t>(1), job.getTicketsCount());
+		}
+
+		TEST_METHOD(AddTwoTicketsToJob)
+		{
+			ExtractionJob job("Job");
+			job.addTicketId(12344);
+			Assert::AreEqual(static_cast<size_t>(1), job.getTicketsCount()); 
+			job.addTicketId(12345);
+			Assert::AreEqual(static_cast<size_t>(2), job.getTicketsCount());
+		}
+
+		TEST_METHOD(AddDuplicateTicketToJob)
+		{
+			ExtractionJob* job = new ExtractionJob("Job");
+			job->addTicketId(12345);
+			function<void()> f1 = [job] { job->addTicketId(12345); };
+			Assert::ExpectException<invalid_argument>(f1);
+		}
+
+		TEST_METHOD(RemoveValidTicketFromAList)
+		{
+			ExtractionJob job("Job");
+			job.addTicketId(12344);
+			job.addTicketId(12345);
+			job.removeTicketId(12344);
+			Assert::AreEqual(static_cast<size_t>(1), job.getTicketsCount());
+		}
+
+		TEST_METHOD(RemoveInvalidTicketFromAList)
+		{
+			ExtractionJob* job = new ExtractionJob("Job");
+			job->addTicketId(12345);
+			function<void()> f1 = [job] { job->removeTicketId(12346); };
+			Assert::ExpectException<invalid_argument>(f1);
+		}
+		
+		TEST_METHOD(ClearEmptyList)
+		{
+			ExtractionJob job("Job");
+			job.clearTickets();
+			Assert::AreEqual(static_cast<size_t>(0), job.getTicketsCount());
+		}
+
+		TEST_METHOD(Clear2TicketList)
+		{
+			ExtractionJob job("Job");
+			job.addTicketId(12344);
+			job.addTicketId(12345);
+			job.clearTickets();
+			Assert::AreEqual(static_cast<size_t>(0), job.getTicketsCount());
+		}
 	};
 }
