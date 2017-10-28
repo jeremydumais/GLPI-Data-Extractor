@@ -59,7 +59,7 @@
           </property>
           <property name="icon">
            <iconset resource="formmain.qrc">
-            <normaloff>:/FormMain/add22.png</normaloff>:/FormMain/add22.png</iconset>
+            <normaloff>:/FormMain/Images/add22.png</normaloff>:/FormMain/Images/add22.png</iconset>
           </property>
          </widget>
         </item>
@@ -70,7 +70,7 @@
           </property>
           <property name="icon">
            <iconset resource="formmain.qrc">
-            <normaloff>:/FormMain/edit22.png</normaloff>:/FormMain/edit22.png</iconset>
+            <normaloff>:/FormMain/Images/edit22.png</normaloff>:/FormMain/Images/edit22.png</iconset>
           </property>
          </widget>
         </item>
@@ -81,7 +81,7 @@
           </property>
           <property name="icon">
            <iconset resource="formmain.qrc">
-            <normaloff>:/FormMain/Delete22.png</normaloff>:/FormMain/Delete22.png</iconset>
+            <normaloff>:/FormMain/Images/Delete22.png</normaloff>:/FormMain/Images/Delete22.png</iconset>
           </property>
          </widget>
         </item>
@@ -124,6 +124,7 @@
     <property name="title">
      <string>&amp;Fichier</string>
     </property>
+    <addaction name="action_Preferences"/>
     <addaction name="action_Quit"/>
    </widget>
    <widget class="QMenu" name="menu_Aide">
@@ -151,7 +152,12 @@
   </action>
   <action name="action_About">
    <property name="text">
-    <string>À &amp;propos</string>
+    <string>À &amp;propos...</string>
+   </property>
+  </action>
+  <action name="action_Preferences">
+   <property name="text">
+    <string>&amp;Préférences...</string>
    </property>
   </action>
  </widget>

@@ -18,8 +18,6 @@ public:
 	FormManagementType formAction;
 	const ExtractionJob &getResult() const;
 
-	bool extractTicketList(const std::string &p_tickets, std::list<unsigned int> &ticketList);
-
 private:
 	Ui::FormJobManagement ui;
 	ExtractionJob result;

@@ -88,7 +88,7 @@ public:
         pushButtonOK = new QPushButton(horizontalLayoutWidget);
         pushButtonOK->setObjectName(QStringLiteral("pushButtonOK"));
         QIcon icon;
-        icon.addFile(QStringLiteral(":/FormJobManagement/Ok22.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QStringLiteral(":/FormJobManagement/Images/Ok22.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButtonOK->setIcon(icon);
 
         horizontalLayout->addWidget(pushButtonOK);
@@ -96,7 +96,7 @@ public:
         pushButtonCancel = new QPushButton(horizontalLayoutWidget);
         pushButtonCancel->setObjectName(QStringLiteral("pushButtonCancel"));
         QIcon icon1;
-        icon1.addFile(QStringLiteral(":/FormJobManagement/Cancel22.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon1.addFile(QStringLiteral(":/FormJobManagement/Images/Cancel22.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButtonCancel->setIcon(icon1);
 
         horizontalLayout->addWidget(pushButtonCancel);

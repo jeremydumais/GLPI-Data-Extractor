@@ -35,6 +35,7 @@ class Ui_FormMainClass
 public:
     QAction *action_Quit;
     QAction *action_About;
+    QAction *action_Preferences;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
@@ -61,6 +62,8 @@ public:
         action_Quit->setObjectName(QStringLiteral("action_Quit"));
         action_About = new QAction(FormMainClass);
         action_About->setObjectName(QStringLiteral("action_About"));
+        action_Preferences = new QAction(FormMainClass);
+        action_Preferences->setObjectName(QStringLiteral("action_Preferences"));
         centralWidget = new QWidget(FormMainClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -97,7 +100,7 @@ public:
         pushButton_AddJob = new QPushButton(centralWidget);
         pushButton_AddJob->setObjectName(QStringLiteral("pushButton_AddJob"));
         QIcon icon;
-        icon.addFile(QStringLiteral(":/FormMain/add22.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon.addFile(QStringLiteral(":/FormMain/Images/add22.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_AddJob->setIcon(icon);
 
         horizontalLayout->addWidget(pushButton_AddJob);
@@ -105,7 +108,7 @@ public:
         pushButton_UpdateJob = new QPushButton(centralWidget);
         pushButton_UpdateJob->setObjectName(QStringLiteral("pushButton_UpdateJob"));
         QIcon icon1;
-        icon1.addFile(QStringLiteral(":/FormMain/edit22.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon1.addFile(QStringLiteral(":/FormMain/Images/edit22.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_UpdateJob->setIcon(icon1);
 
         horizontalLayout->addWidget(pushButton_UpdateJob);
@@ -113,7 +116,7 @@ public:
         pushButton_DeleteJob = new QPushButton(centralWidget);
         pushButton_DeleteJob->setObjectName(QStringLiteral("pushButton_DeleteJob"));
         QIcon icon2;
-        icon2.addFile(QStringLiteral(":/FormMain/Delete22.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon2.addFile(QStringLiteral(":/FormMain/Images/Delete22.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_DeleteJob->setIcon(icon2);
 
         horizontalLayout->addWidget(pushButton_DeleteJob);
@@ -151,6 +154,7 @@ public:
 
         menuBar->addAction(menu_Fichier->menuAction());
         menuBar->addAction(menu_Aide->menuAction());
+        menu_Fichier->addAction(action_Preferences);
         menu_Fichier->addAction(action_Quit);
         menu_Aide->addAction(action_About);
 
@@ -164,7 +168,8 @@ public:
     {
         FormMainClass->setWindowTitle(QApplication::translate("FormMainClass", "GLPI Data Extractor", Q_NULLPTR));
         action_Quit->setText(QApplication::translate("FormMainClass", "&Quitter", Q_NULLPTR));
-        action_About->setText(QApplication::translate("FormMainClass", "\303\200 &propos", Q_NULLPTR));
+        action_About->setText(QApplication::translate("FormMainClass", "\303\200 &propos...", Q_NULLPTR));
+        action_Preferences->setText(QApplication::translate("FormMainClass", "&Pr\303\251f\303\251rences...", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem = tableWidget->horizontalHeaderItem(0);
         ___qtablewidgetitem->setText(QApplication::translate("FormMainClass", "Travail", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidget->horizontalHeaderItem(1);

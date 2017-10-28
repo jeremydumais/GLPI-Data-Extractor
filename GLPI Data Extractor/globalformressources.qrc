@@ -1,7 +1,0 @@
-<RCC>
-  <qresource prefix="global">
-    <file>add22.png</file>
-    <file>edit22.png</file>
-    <file>Delete22.png</file>
-  </qresource>
-</RCC>

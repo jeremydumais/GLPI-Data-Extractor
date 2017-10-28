@@ -1,7 +1,7 @@
 <RCC>
-  <qresource prefix="FormMain">
-    <file>Delete22.png</file>
-    <file>edit22.png</file>
-    <file>add22.png</file>
-  </qresource>
+    <qresource prefix="/FormMain">
+        <file>Images/add22.png</file>
+        <file>Images/Delete22.png</file>
+        <file>Images/edit22.png</file>
+    </qresource>
 </RCC>

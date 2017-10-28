@@ -50,7 +50,7 @@ void FormMain::pushButtonAddJob_Click()
 	FormJobManagement formJobManagement(this);
 	if (formJobManagement.exec() == QDialog::Accepted)
 	{
-		
+		setWindowTitle(QString::number(formJobManagement.getResult().getTicketsCount()));
 	}
 }
 

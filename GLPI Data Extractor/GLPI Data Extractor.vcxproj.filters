@@ -94,9 +94,6 @@
     <CustomBuild Include="formjobmanagement.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="globalformressources.qrc">
-      <Filter>Resource Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="formjobmanagement.qrc">
       <Filter>Resource Files</Filter>
     </CustomBuild>
@@ -120,11 +117,5 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="GLPI Data Extractor.ico" />
-    <Image Include="Cancel22.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Ok22.png">
-      <Filter>Resource Files</Filter>
-    </Image>
   </ItemGroup>
 </Project>
