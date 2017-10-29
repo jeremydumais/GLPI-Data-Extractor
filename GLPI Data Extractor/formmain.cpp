@@ -6,6 +6,9 @@
 #define HAVE_STRUCT_TIMESPEC
 #include "pthread.h"
 #include <qstandarditemmodel.h>
+#include <list>
+
+using namespace std;
 
 FormMain::FormMain(QWidget *parent)
 	: QMainWindow(parent)
@@ -95,10 +98,16 @@ void FormMain::refreshJobList()
 void FormMain::tableItemDoubleClicked(int row, int column)
 {
 	QTableWidgetItem *item = new QTableWidgetItem;
-	item = ui.tableWidgetJobs->item(row, column);
+	item = ui.tableWidgetJobs->item(row, 0);
+	string jobNameToUpdate = item->text().toStdString();
 	FormJobManagement formJobManagement(this, FormManagementType::Update);
+	formJobManagement.PrepareUpdateData(m_jobs, jobNameToUpdate);
 	if (formJobManagement.exec() == QDialog::Accepted)
 	{
+		//Find the element to update in the list
+		list<ExtractionJob>::iterator it = find_if(m_jobs.begin(), m_jobs.end(), [&jobNameToUpdate](const ExtractionJob &job) { return job.getName() == jobNameToUpdate; });
+		it->setName(formJobManagement.getResult().getName());
+		it->setTicketIds(formJobManagement.getResult().getTicketIds());
 		refreshJobList();
 	}
 }

@@ -6,14 +6,14 @@
 using namespace std;
 
 FormJobManagement::FormJobManagement(QWidget *parent, FormManagementType p_action)
-	: QDialog(parent), formAction(p_action), result("temporaryJob1")
+	: QDialog(parent), m_formAction(p_action), m_result("temporaryJob1"), m_actualList(list<ExtractionJob>()), m_jobNameToUpdate("")
 {
 	ui.setupUi(this);
 	setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
 	connect(ui.pushButtonOK, SIGNAL(clicked()), this, SLOT(pushButtonOK_Click()));
 
 	string title = "";
-	if (formAction == FormManagementType::Add)
+	if (m_formAction == FormManagementType::Add)
 		title = "Ajout d'un travail";
 	else
 		title = "Modification d'un travail";
@@ -41,9 +41,9 @@ void FormJobManagement::pushButtonOK_Click()
 	{
 		try
 		{
-			result.setName(ui.lineEditName->text().toStdString());
+			m_result.setName(ui.lineEditName->text().toStdString());
 			for (unsigned int i : ticketList)
-				result.addTicketId(i);
+				m_result.addTicketId(i);
 			accept();
 		}
 		catch (invalid_argument e)
@@ -55,5 +55,22 @@ void FormJobManagement::pushButtonOK_Click()
 
 const ExtractionJob &FormJobManagement::getResult() const
 {
-	return result;
+	return m_result;
+}
+
+void FormJobManagement::PrepareUpdateData(list<ExtractionJob> &p_actualList, const string &p_jobNameToUpdate)
+{
+	m_actualList = p_actualList;
+	m_jobNameToUpdate = p_jobNameToUpdate;
+	ui.lineEditName->setText(QString::fromStdString(m_jobNameToUpdate));
+	//Find the element to update in the list
+	list<ExtractionJob>::iterator it = find_if(m_actualList.begin(), m_actualList.end(), [&p_jobNameToUpdate](const ExtractionJob &job) { return job.getName() == p_jobNameToUpdate; });
+	QString strResult = "";
+	for (auto elem : it->getTicketIds())
+	{
+		if (!strResult.isEmpty())
+			strResult += ", ";
+		strResult += QString::number(elem);
+	}
+	ui.plainTextEditTicketIds->setPlainText(strResult);
 }

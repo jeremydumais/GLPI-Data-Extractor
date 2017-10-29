@@ -51,3 +51,13 @@ void ExtractionJob::clearTickets()
 {
 	m_ticketIds.clear();
 }
+
+list<unsigned int> ExtractionJob::getTicketIds() const
+{
+	return m_ticketIds;
+}
+
+void ExtractionJob::setTicketIds(const std::list<unsigned int> &p_ticketIds)
+{
+	m_ticketIds = p_ticketIds;
+}
