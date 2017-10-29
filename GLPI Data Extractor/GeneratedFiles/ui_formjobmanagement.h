@@ -43,14 +43,14 @@ public:
     {
         if (FormJobManagement->objectName().isEmpty())
             FormJobManagement->setObjectName(QStringLiteral("FormJobManagement"));
-        FormJobManagement->resize(609, 308);
+        FormJobManagement->resize(607, 314);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(FormJobManagement->sizePolicy().hasHeightForWidth());
         FormJobManagement->setSizePolicy(sizePolicy);
         FormJobManagement->setMinimumSize(QSize(0, 0));
-        FormJobManagement->setMaximumSize(QSize(804, 597));
+        FormJobManagement->setSizeGripEnabled(false);
         label = new QLabel(FormJobManagement);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(92, 90, 81, 16));
@@ -70,8 +70,8 @@ public:
         font.setPointSize(20);
         labelTitle->setFont(font);
         labelTitle->setAutoFillBackground(false);
-        labelTitle->setStyleSheet(QLatin1String("color: rgb(255, 255, 255);\n"
-"background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 173, 44, 255), stop:1 rgba(44, 44, 44, 255));"));
+        labelTitle->setStyleSheet(QLatin1String("border-image: url(:/FormJobManagement/Images/Header.png);\n"
+"color: rgb(255, 255, 255);"));
         labelTitle->setAlignment(Qt::AlignCenter);
         horizontalLayoutWidget = new QWidget(FormJobManagement);
         horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));

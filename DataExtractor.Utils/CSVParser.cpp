@@ -22,7 +22,7 @@ bool CSVParser::ParseUIntList(const std::string &p_listStr, std::list<unsigned i
 	{
 		if (c >= '0' && c <= '9')
 			numberTemp += c;
-		else if(c != ' ' && c != ',')
+		else if(c != ' ' && c != '\n' && c != ',')
 		{
 			retVal = false;
 			break;

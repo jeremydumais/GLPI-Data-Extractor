@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FormPreferences</class>
+ <widget class="QDialog" name="FormPreferences">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>602</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Préférences</string>
+  </property>
+  <widget class="QWidget" name="horizontalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>240</y>
+     <width>581</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <spacer name="horizontalSpacer">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>40</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButtonOK">
+      <property name="text">
+       <string>&amp;OK</string>
+      </property>
+      <property name="icon">
+       <iconset resource="formjobmanagement.qrc">
+        <normaloff>:/FormJobManagement/Images/Ok22.png</normaloff>:/FormJobManagement/Images/Ok22.png</iconset>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButtonCancel">
+      <property name="text">
+       <string>&amp;Annuler</string>
+      </property>
+      <property name="icon">
+       <iconset resource="formjobmanagement.qrc">
+        <normaloff>:/FormJobManagement/Images/Cancel22.png</normaloff>:/FormJobManagement/Images/Cancel22.png</iconset>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QLabel" name="labelTitle">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>611</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>20</pointsize>
+    </font>
+   </property>
+   <property name="autoFillBackground">
+    <bool>false</bool>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url(:/FormJobManagement/Images/Header.png);
+color: rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>Préférences</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelOutputFolder">
+   <property name="geometry">
+    <rect>
+     <x>18</x>
+     <y>121</y>
+     <width>176</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Dossier d'enregistrement des fichiers</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEditGLPIAddress">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>85</y>
+     <width>381</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="labelGLPIAddress">
+   <property name="geometry">
+    <rect>
+     <x>18</x>
+     <y>85</y>
+     <width>152</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Adresse web du système GLPI :</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEditOutputFolder">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>121</y>
+     <width>351</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButtonEtcFolder">
+   <property name="geometry">
+    <rect>
+     <x>550</x>
+     <y>120</y>
+     <width>31</width>
+     <height>22</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>...</string>
+   </property>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="formjobmanagement.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>pushButtonCancel</sender>
+   <signal>clicked()</signal>
+   <receiver>FormPreferences</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>552</x>
+     <y>264</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>300</x>
+     <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

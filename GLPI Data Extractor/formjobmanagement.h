@@ -12,7 +12,7 @@ class FormJobManagement : public QDialog
 	Q_OBJECT
 
 public:
-	FormJobManagement(QWidget *parent = 0, FormManagementType p_action = FormManagementType::Add);
+	FormJobManagement(QWidget *parent = 0, FormManagementType p_action = FormManagementType::Add);//, std::list<ExtractionJob> p_);
 	~FormJobManagement();
 
 	FormManagementType formAction;

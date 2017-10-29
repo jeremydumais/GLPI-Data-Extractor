@@ -72,5 +72,14 @@ namespace DataExtractorUtilsTests
 			list<unsigned int> list1;  
 			Assert::IsFalse(csv.ParseUIntList("123, 4a5", list1));
 		}
+
+		TEST_METHOD(ParseUIntList_ParsTwoValidNumberWithEnter)
+		{
+			CSVParser csv;
+			list<unsigned int> list1;
+			Assert::IsTrue(csv.ParseUIntList(string("123") + '\n', list1));
+			Assert::AreEqual(static_cast<size_t>(1), list1.size());
+			Assert::AreEqual(123u, list1.front());
+		}
 	};
 }

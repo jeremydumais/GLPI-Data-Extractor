@@ -9,6 +9,7 @@ FormJobManagement::FormJobManagement(QWidget *parent, FormManagementType p_actio
 	: QDialog(parent), formAction(p_action), result("temporaryJob1")
 {
 	ui.setupUi(this);
+	setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
 	connect(ui.pushButtonOK, SIGNAL(clicked()), this, SLOT(pushButtonOK_Click()));
 
 	string title = "";
@@ -23,12 +24,12 @@ FormJobManagement::FormJobManagement(QWidget *parent, FormManagementType p_actio
 
 FormJobManagement::~FormJobManagement()
 {
-
 }
 
 void FormJobManagement::pushButtonOK_Click()
 {
 	list<unsigned int> ticketList;
+	//string t = ui.plainTextEditTicketIds->toPlainText().toStdString();
 	CSVParser csv;
 	if (ui.lineEditName->text().isEmpty())
 		QMessageBox::critical(this, "Erreur", QLatin1String("Le nom du travail ne peut être vide!"));

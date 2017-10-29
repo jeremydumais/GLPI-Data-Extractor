@@ -1,6 +1,7 @@
 <RCC>
-    <qresource prefix="/FormJobManagement">
-        <file>Images/Cancel22.png</file>
-        <file>Images/Ok22.png</file>
-    </qresource>
+  <qresource prefix="/FormJobManagement">
+    <file>Images/Cancel22.png</file>
+    <file>Images/Header.png</file>
+    <file>Images/Ok22.png</file>
+  </qresource>
 </RCC>
