@@ -16,6 +16,20 @@ ExtractionJob::~ExtractionJob()
 {
 }
 
+//Copy constructor
+ExtractionJob::ExtractionJob(const ExtractionJob &p_job)
+	: m_name(p_job.m_name), m_ticketIds(p_job.m_ticketIds)
+{
+}
+
+//Move constructor
+ExtractionJob::ExtractionJob(ExtractionJob &&p_job)
+	: m_name(move(p_job.m_name)), m_ticketIds(move(p_job.m_ticketIds))
+{
+	p_job.m_name = "<undefined>";
+	p_job.m_ticketIds.clear();
+}
+
 //Copy assignment
 ExtractionJob &ExtractionJob::operator=(const ExtractionJob &p_job)
 {
@@ -24,10 +38,12 @@ ExtractionJob &ExtractionJob::operator=(const ExtractionJob &p_job)
 	return *this;
 }
 
-//Copy constructor
-ExtractionJob::ExtractionJob(const ExtractionJob &p_job)
-	: m_name(p_job.m_name), m_ticketIds(p_job.m_ticketIds)
+//Move assignment
+ExtractionJob &ExtractionJob::operator=(ExtractionJob &&p_job)
 {
+	swap(m_name, p_job.m_name);
+	swap(m_ticketIds, p_job.m_ticketIds);
+	return *this;
 }
 
 const string &ExtractionJob::getName() const

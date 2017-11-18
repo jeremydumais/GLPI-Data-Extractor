@@ -7,11 +7,13 @@
 class ExtractionJob
 {
 public:
-	DllExport ExtractionJob(const std::string &p_name);
-	DllExport virtual ~ExtractionJob();
+	DllExport ExtractionJob(const std::string &p_name); //COnstructor
+	DllExport virtual ~ExtractionJob();	//Destructor
 	DllExport ExtractionJob(const ExtractionJob &p_job); //Copy constructor
+	DllExport ExtractionJob(ExtractionJob &&p_job); //Move constructor
+
 	DllExport ExtractionJob &operator=(const ExtractionJob &p_job); //Copy assignment
-	//Move constructor
+	DllExport ExtractionJob &operator=(ExtractionJob &&p_job); //Move assignment
 
 	DllExport const std::string &getName() const;
 	DllExport const std::list<unsigned int> getTicketIds() const;

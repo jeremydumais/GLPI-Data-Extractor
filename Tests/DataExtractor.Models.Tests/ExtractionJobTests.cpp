@@ -29,11 +29,12 @@ namespace DataExtractorModelsTests
 			catch (...) {}
 		}
 
-		TEST_METHOD(CopyConstructorTest1)
+		TEST_METHOD(CopyConstructorTestWith1Ticket)
 		{
 			ExtractionJob job("Job1");
 			job.addTicketId(123);
 			ExtractionJob job2(job);
+
 			//Change/remove first job values
 			job.setName("test");
 			job.clearTickets();
@@ -42,6 +43,38 @@ namespace DataExtractorModelsTests
 			Assert::AreEqual(static_cast<size_t>(0), job.getTicketsCount());
 			Assert::AreEqual("Job1", job2.getName().c_str());
 			Assert::AreEqual(static_cast<size_t>(1), job2.getTicketsCount());
+		}
+
+		TEST_METHOD(CopyAssignmentTestWith2Tickets)
+		{
+			ExtractionJob job("Job1");
+			job.addTicketId(123);
+			job.addTicketId(456); 
+			ExtractionJob job2 = job;
+
+			//Change/remove first job values
+			job.setName("test");
+			job.clearTickets();
+
+			Assert::AreEqual("test", job.getName().c_str());
+			Assert::AreEqual(static_cast<size_t>(0), job.getTicketsCount());
+			Assert::AreEqual("Job1", job2.getName().c_str());
+			Assert::AreEqual(static_cast<size_t>(2), job2.getTicketsCount());
+		}
+
+		TEST_METHOD(MoveConstructorTestWith2Tickets)
+		{
+			ExtractionJob job("Job1");
+			job.addTicketId(123);
+			job.addTicketId(456);
+			ExtractionJob job2("Job2");
+			job2.addTicketId(123);
+			job2 = move(job);
+
+			Assert::AreEqual("Job2", job.getName().c_str());
+			Assert::AreEqual(static_cast<size_t>(1), job.getTicketsCount());
+			Assert::AreEqual("Job1", job2.getName().c_str());
+			Assert::AreEqual(static_cast<size_t>(2), job2.getTicketsCount());
 		}
 
 		TEST_METHOD(SetNameValid)
