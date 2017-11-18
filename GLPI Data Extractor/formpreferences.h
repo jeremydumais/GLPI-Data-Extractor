@@ -14,6 +14,11 @@ public:
 
 private:
 	Ui::FormPreferences ui;
+
+private slots:
+	void showEvent(QShowEvent* event);
+	void pushButtonOK_Click();
+	void pushButtonEtcFolder_Click();
 };
 
 #endif // FORMPREFERENCES_H

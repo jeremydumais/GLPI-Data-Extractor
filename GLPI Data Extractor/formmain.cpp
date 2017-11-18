@@ -8,6 +8,7 @@
 #include <qstandarditemmodel.h>
 #include <list>
 #include <qmessagebox.h>
+#include <qsettings.h>
 
 using namespace std;
 
@@ -23,6 +24,7 @@ FormMain::FormMain(QWidget *parent)
 	connect(ui.pushButton_UpdateJob, SIGNAL(clicked()), this, SLOT(pushButtonUpdateJob_Click()));
 	connect(ui.pushButton_DeleteJob, SIGNAL(clicked()), this, SLOT(pushButtonDeleteJob_Click()));
 	connect(ui.tableWidgetJobs, SIGNAL(cellDoubleClicked(int, int)), this, SLOT(tableItemDoubleClicked(int, int)));
+	connect(ui.tableWidgetJobs, SIGNAL(itemPressed(QTableWidgetItem *)), this, SLOT(itemPressed(QTableWidgetItem *)));
 	connect(ui.pushButtonExecute, SIGNAL(clicked()), this, SLOT(pushButtonExecute_Click()));
 	connect(ui.action_Preferences, SIGNAL(triggered()), this, SLOT(pushButtonPreferences_Click()));
 	connect(ui.action_About, SIGNAL(triggered()), this, SLOT(pushButtonAbout_Click()));
@@ -30,23 +32,35 @@ FormMain::FormMain(QWidget *parent)
 
 FormMain::~FormMain()
 {
-
 }
 
 void FormMain::pushButtonExecute_Click()
 {
-	//ui.pushButtonExecute->setEnabled(false);
-	wkhtmltopdf_init(0);
-	wkhtmltopdf_global_settings *global = wkhtmltopdf_create_global_settings();
-	wkhtmltopdf_set_global_setting(global, "out", "test.pdf");
-	wkhtmltopdf_converter *converter = wkhtmltopdf_create_converter(global);
-	wkhtmltopdf_object_settings* object = wkhtmltopdf_create_object_settings();
-	wkhtmltopdf_set_object_setting(object, "page", "https://github.com/wkhtmltopdf/wkhtmltopdf");
-	wkhtmltopdf_add_object(converter, object, NULL);
-	wkhtmltopdf_convert(converter);
-	wkhtmltopdf_destroy_converter(converter);
-	wkhtmltopdf_deinit();
-	//ui.pushButtonExecute->setEnabled(true);
+	QSettings settings;
+	QString glpiUrl = settings.value("GLPIUrl", "").toString();
+	QString outputFolder = settings.value("OutputFolder", "").toString();
+	if (m_jobs.size() == 0)
+		QMessageBox::warning(this, "Erreur", QLatin1String("Il n'y a aucun travail à exécuter!"));
+	//Check if the output folder and the GLPI url has been correctly sets
+	else if (glpiUrl.isEmpty())
+		QMessageBox::critical(this, "Erreur", QLatin1String("L'adresse web du système GLPI n'est pas configuré. Voir dans les préférences..."));
+	else if (outputFolder.isEmpty())
+		QMessageBox::critical(this, "Erreur", QLatin1String("Le dossier d'enregistrement des fichiers n'est pas configuré. Voir dans les préférences..."));
+	else
+	{
+		//Start one thread per job to execute
+		wkhtmltopdf_init(0);
+		wkhtmltopdf_global_settings *global = wkhtmltopdf_create_global_settings();
+		wkhtmltopdf_set_global_setting(global, "out", "test.pdf");
+		wkhtmltopdf_converter *converter = wkhtmltopdf_create_converter(global);
+		wkhtmltopdf_object_settings* object = wkhtmltopdf_create_object_settings();
+		wkhtmltopdf_set_object_setting(object, "page", "https://github.com/wkhtmltopdf/wkhtmltopdf");
+		wkhtmltopdf_add_object(converter, object, NULL);
+		wkhtmltopdf_convert(converter);
+		wkhtmltopdf_destroy_converter(converter);
+		wkhtmltopdf_deinit();
+		//ui.pushButtonExecute->setEnabled(true);
+	}
 }
 
 void FormMain::pushButtonPreferences_Click()
@@ -107,6 +121,24 @@ void FormMain::tableItemDoubleClicked(int row, int column)
 		it->setName(formJobManagement.getResult().getName());
 		it->setTicketIds(formJobManagement.getResult().getTicketIds());
 		refreshJobList();
+	}
+}
+
+void FormMain::itemPressed(QTableWidgetItem *item)
+{
+	ui.tableWidgetTicketsInJob->setRowCount(0);
+	QTableWidgetItem *cellJobName = ui.tableWidgetJobs->item(item->row(), 0);
+	string jobNameToDisplay = cellJobName->text().toStdString();
+	auto it = find_if(m_jobs.begin(), m_jobs.end(), [&jobNameToDisplay](const ExtractionJob &job) { return job.getName() == jobNameToDisplay; });
+	if (it != m_jobs.end())
+	{
+		unsigned int row = 0;
+		ui.tableWidgetTicketsInJob->setRowCount(it->getTicketsCount());
+		for (auto ticketId : it->getTicketIds())
+		{
+			ui.tableWidgetTicketsInJob->setItem(row, 0, new QTableWidgetItem(QString::number(ticketId)));
+			row++;
+		}
 	}
 }
 

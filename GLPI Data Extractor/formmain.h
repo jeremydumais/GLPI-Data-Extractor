@@ -26,6 +26,7 @@ private slots:
 	void pushButtonUpdateJob_Click();
 	void pushButtonDeleteJob_Click();
 	void tableItemDoubleClicked(int row, int column);
+	void itemPressed(QTableWidgetItem *item);
 };
 
 #endif // FORMMAIN_H
