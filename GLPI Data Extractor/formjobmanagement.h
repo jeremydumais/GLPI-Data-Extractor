@@ -16,7 +16,7 @@ public:
 	~FormJobManagement();
 
 	const ExtractionJob &getResult() const;
-	void PrepareUpdateData(std::list<ExtractionJob> &p_actualList, const std::string &p_jobNameToUpdate);
+	void PrepareFormData(const std::list<ExtractionJob> &p_actualList, const std::string &p_jobNameToUpdate = "");
 
 private:
 	Ui::FormJobManagement ui;

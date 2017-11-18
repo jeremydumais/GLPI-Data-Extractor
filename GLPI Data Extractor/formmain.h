@@ -24,6 +24,7 @@ private slots:
 	void pushButtonAbout_Click();
 	void pushButtonAddJob_Click();
 	void pushButtonUpdateJob_Click();
+	void pushButtonDeleteJob_Click();
 	void tableItemDoubleClicked(int row, int column);
 };
 

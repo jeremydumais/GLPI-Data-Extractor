@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'formmain.ui'
 **
-** Created by: Qt User Interface Compiler version 5.8.0
+** Created by: Qt User Interface Compiler version 5.9.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -38,7 +38,9 @@ public:
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
+    QHBoxLayout *horizontalLayout_2;
     QTableWidget *tableWidgetJobs;
+    QTableWidget *tableWidgetTicketsInJob;
     QProgressBar *progressBarExecution;
     QHBoxLayout *horizontalLayout;
     QPushButton *pushButton_AddJob;
@@ -55,7 +57,7 @@ public:
     {
         if (FormMainClass->objectName().isEmpty())
             FormMainClass->setObjectName(QStringLiteral("FormMainClass"));
-        FormMainClass->resize(1088, 629);
+        FormMainClass->resize(879, 585);
         FormMainClass->setWindowOpacity(1);
         FormMainClass->setDocumentMode(false);
         action_Quit = new QAction(FormMainClass);
@@ -74,6 +76,9 @@ public:
         verticalLayout = new QVBoxLayout();
         verticalLayout->setSpacing(6);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         tableWidgetJobs = new QTableWidget(centralWidget);
         if (tableWidgetJobs->columnCount() < 2)
             tableWidgetJobs->setColumnCount(2);
@@ -82,8 +87,7 @@ public:
         QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
         tableWidgetJobs->setHorizontalHeaderItem(1, __qtablewidgetitem1);
         tableWidgetJobs->setObjectName(QStringLiteral("tableWidgetJobs"));
-        tableWidgetJobs->setStyleSheet(QLatin1String("background-color: rgb(70, 70, 70);\n"
-"color: rgb(211, 211, 211)"));
+        tableWidgetJobs->setStyleSheet(QStringLiteral(""));
         tableWidgetJobs->setEditTriggers(QAbstractItemView::NoEditTriggers);
         tableWidgetJobs->setDragDropOverwriteMode(false);
         tableWidgetJobs->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -92,7 +96,24 @@ public:
         tableWidgetJobs->horizontalHeader()->setProperty("showSortIndicator", QVariant(true));
         tableWidgetJobs->horizontalHeader()->setStretchLastSection(false);
 
-        verticalLayout->addWidget(tableWidgetJobs);
+        horizontalLayout_2->addWidget(tableWidgetJobs);
+
+        tableWidgetTicketsInJob = new QTableWidget(centralWidget);
+        if (tableWidgetTicketsInJob->columnCount() < 1)
+            tableWidgetTicketsInJob->setColumnCount(1);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        tableWidgetTicketsInJob->setHorizontalHeaderItem(0, __qtablewidgetitem2);
+        tableWidgetTicketsInJob->setObjectName(QStringLiteral("tableWidgetTicketsInJob"));
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(tableWidgetTicketsInJob->sizePolicy().hasHeightForWidth());
+        tableWidgetTicketsInJob->setSizePolicy(sizePolicy);
+
+        horizontalLayout_2->addWidget(tableWidgetTicketsInJob);
+
+
+        verticalLayout->addLayout(horizontalLayout_2);
 
         progressBarExecution = new QProgressBar(centralWidget);
         progressBarExecution->setObjectName(QStringLiteral("progressBarExecution"));
@@ -164,7 +185,7 @@ public:
         FormMainClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(FormMainClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1088, 21));
+        menuBar->setGeometry(QRect(0, 0, 879, 21));
         QPalette palette;
         menuBar->setPalette(palette);
         menu_Fichier = new QMenu(menuBar);
@@ -195,6 +216,8 @@ public:
         ___qtablewidgetitem->setText(QApplication::translate("FormMainClass", "Travail", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem1 = tableWidgetJobs->horizontalHeaderItem(1);
         ___qtablewidgetitem1->setText(QApplication::translate("FormMainClass", "Nombre d'items", Q_NULLPTR));
+        QTableWidgetItem *___qtablewidgetitem2 = tableWidgetTicketsInJob->horizontalHeaderItem(0);
+        ___qtablewidgetitem2->setText(QApplication::translate("FormMainClass", "Ticket dans le travail", Q_NULLPTR));
         pushButton_AddJob->setText(QApplication::translate("FormMainClass", "Ajouter", Q_NULLPTR));
         pushButton_UpdateJob->setText(QApplication::translate("FormMainClass", "Modifier", Q_NULLPTR));
         pushButton_DeleteJob->setText(QApplication::translate("FormMainClass", "Supprimer", Q_NULLPTR));

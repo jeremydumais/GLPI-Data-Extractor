@@ -7,22 +7,21 @@
 #include "pthread.h"
 #include <qstandarditemmodel.h>
 #include <list>
+#include <qmessagebox.h>
 
 using namespace std;
 
 FormMain::FormMain(QWidget *parent)
-	: QMainWindow(parent)
+	: QMainWindow(parent), m_jobs(list<ExtractionJob>())
 {
 	ui.setupUi(this);
-	/*ui.menuBar->setStyleSheet("QMenuBar::item:selected { background: #a8a8a8; }");
-	ui.tableWidgetJobs->verticalHeader()->setStyleSheet("::section { background-color: rgb(66, 66, 66); }");
-	ui.tableWidgetJobs->horizontalHeader()->setStyleSheet("::section { background-color: rgb(66, 66, 66); }");*/
-	//ui.tableWidgetJobs->setRowCount(5);
 	ui.tableWidgetJobs->setColumnWidth(0, 200);
 	ui.tableWidgetJobs->setColumnWidth(1, 150);
+	ui.tableWidgetTicketsInJob->setColumnWidth(0, 220);
 	ui.progressBarExecution->setVisible(false);
 	connect(ui.pushButton_AddJob, SIGNAL(clicked()), this, SLOT(pushButtonAddJob_Click()));
 	connect(ui.pushButton_UpdateJob, SIGNAL(clicked()), this, SLOT(pushButtonUpdateJob_Click()));
+	connect(ui.pushButton_DeleteJob, SIGNAL(clicked()), this, SLOT(pushButtonDeleteJob_Click()));
 	connect(ui.tableWidgetJobs, SIGNAL(cellDoubleClicked(int, int)), this, SLOT(tableItemDoubleClicked(int, int)));
 	connect(ui.pushButtonExecute, SIGNAL(clicked()), this, SLOT(pushButtonExecute_Click()));
 	connect(ui.action_Preferences, SIGNAL(triggered()), this, SLOT(pushButtonPreferences_Click()));
@@ -67,6 +66,7 @@ void FormMain::pushButtonAbout_Click()
 void FormMain::pushButtonAddJob_Click()
 {
 	FormJobManagement formJobManagement(this);
+	formJobManagement.PrepareFormData(m_jobs);
 	if (formJobManagement.exec() == QDialog::Accepted)
 	{
 		m_jobs.push_back(formJobManagement.getResult());
@@ -76,10 +76,9 @@ void FormMain::pushButtonAddJob_Click()
 
 void FormMain::pushButtonUpdateJob_Click()
 {
-	FormJobManagement formJobManagement(this, FormManagementType::Update);
-	if (formJobManagement.exec() == QDialog::Accepted)
+	if (ui.tableWidgetJobs->selectedItems().size() > 0)
 	{
-		refreshJobList();
+		tableItemDoubleClicked(ui.tableWidgetJobs->selectedItems().first()->row(), 0);
 	}
 }
 
@@ -97,17 +96,33 @@ void FormMain::refreshJobList()
 
 void FormMain::tableItemDoubleClicked(int row, int column)
 {
-	QTableWidgetItem *item = new QTableWidgetItem;
-	item = ui.tableWidgetJobs->item(row, 0);
+	QTableWidgetItem *item = ui.tableWidgetJobs->item(row, 0);
 	string jobNameToUpdate = item->text().toStdString();
 	FormJobManagement formJobManagement(this, FormManagementType::Update);
-	formJobManagement.PrepareUpdateData(m_jobs, jobNameToUpdate);
+	formJobManagement.PrepareFormData(m_jobs, jobNameToUpdate);
 	if (formJobManagement.exec() == QDialog::Accepted)
 	{
 		//Find the element to update in the list
-		list<ExtractionJob>::iterator it = find_if(m_jobs.begin(), m_jobs.end(), [&jobNameToUpdate](const ExtractionJob &job) { return job.getName() == jobNameToUpdate; });
+		auto it = find_if(m_jobs.begin(), m_jobs.end(), [&jobNameToUpdate](const ExtractionJob &job) { return job.getName() == jobNameToUpdate; });
 		it->setName(formJobManagement.getResult().getName());
 		it->setTicketIds(formJobManagement.getResult().getTicketIds());
 		refreshJobList();
+	}
+}
+
+void FormMain::pushButtonDeleteJob_Click()
+{
+	if (ui.tableWidgetJobs->selectedItems().size() > 0)
+	{
+		if (QMessageBox::question(this, "Confirmation", QLatin1String("Êtes-vous certain de vouloir supprimer le travail sélectionné?"),
+			QMessageBox::Yes | QMessageBox::No,
+			QMessageBox::No) == QMessageBox::Yes)
+		{
+			QTableWidgetItem *item = ui.tableWidgetJobs->item(ui.tableWidgetJobs->selectedItems().first()->row(), 0);
+			string jobNameToDelete = item->text().toStdString();
+			auto it = find_if(m_jobs.begin(), m_jobs.end(), [&jobNameToDelete](const ExtractionJob &job) { return job.getName() == jobNameToDelete; });
+			m_jobs.erase(it);
+			refreshJobList();
+		}
 	}
 }

@@ -3,6 +3,7 @@
 
 using namespace std;
 
+//Constructor
 ExtractionJob::ExtractionJob(const string &p_name)
 	: m_name(p_name)
 {
@@ -10,7 +11,22 @@ ExtractionJob::ExtractionJob(const string &p_name)
 		throw invalid_argument("p_name");
 }
 
+//Destructor
 ExtractionJob::~ExtractionJob()
+{
+}
+
+//Copy assignment
+ExtractionJob &ExtractionJob::operator=(const ExtractionJob &p_job)
+{
+	m_name = p_job.m_name;
+	copy(p_job.m_ticketIds.begin(), p_job.m_ticketIds.end(), back_inserter(m_ticketIds));
+	return *this;
+}
+
+//Copy constructor
+ExtractionJob::ExtractionJob(const ExtractionJob &p_job)
+	: m_name(p_job.m_name), m_ticketIds(p_job.m_ticketIds)
 {
 }
 
@@ -52,7 +68,7 @@ void ExtractionJob::clearTickets()
 	m_ticketIds.clear();
 }
 
-list<unsigned int> ExtractionJob::getTicketIds() const
+const list<unsigned int> ExtractionJob::getTicketIds() const
 {
 	return m_ticketIds;
 }

@@ -29,7 +29,6 @@ FormJobManagement::~FormJobManagement()
 void FormJobManagement::pushButtonOK_Click()
 {
 	list<unsigned int> ticketList;
-	//string t = ui.plainTextEditTicketIds->toPlainText().toStdString();
 	CSVParser csv;
 	if (ui.lineEditName->text().isEmpty())
 		QMessageBox::critical(this, "Erreur", QLatin1String("Le nom du travail ne peut être vide!"));
@@ -39,17 +38,24 @@ void FormJobManagement::pushButtonOK_Click()
 		QMessageBox::critical(this, "Erreur", QLatin1String("La liste des numéros de billets contient un ou des éléments invalides!"));
 	else
 	{
-		try
+		string newJobName = ui.lineEditName->text().toStdString();
+		auto it = find_if(m_actualList.begin(), m_actualList.end(), [&newJobName](const ExtractionJob &job) { return job.getName() == newJobName; });
+		if (it == m_actualList.end() || (it != m_actualList.end() && newJobName == m_jobNameToUpdate))
 		{
-			m_result.setName(ui.lineEditName->text().toStdString());
-			for (unsigned int i : ticketList)
-				m_result.addTicketId(i);
-			accept();
+			try
+			{
+				m_result.setName(newJobName);
+				for (unsigned int i : ticketList)
+					m_result.addTicketId(i);
+				accept();
+			}
+			catch (invalid_argument e)
+			{
+				QMessageBox::critical(this, "Erreur", QLatin1String("Une erreur s'est produite!"));
+			}
 		}
-		catch (invalid_argument e)
-		{
-			QMessageBox::critical(this, "Erreur", QLatin1String("Une erreur s'est produite!"));
-		}
+		else
+			QMessageBox::critical(this, "Erreur", QLatin1String("Un travail avec ce nom existe déjà dans la liste!"));
 	}
 }
 
@@ -58,19 +64,23 @@ const ExtractionJob &FormJobManagement::getResult() const
 	return m_result;
 }
 
-void FormJobManagement::PrepareUpdateData(list<ExtractionJob> &p_actualList, const string &p_jobNameToUpdate)
+void FormJobManagement::PrepareFormData(const list<ExtractionJob> &p_actualList, const string &p_jobNameToUpdate)
 {
 	m_actualList = p_actualList;
 	m_jobNameToUpdate = p_jobNameToUpdate;
 	ui.lineEditName->setText(QString::fromStdString(m_jobNameToUpdate));
 	//Find the element to update in the list
 	list<ExtractionJob>::iterator it = find_if(m_actualList.begin(), m_actualList.end(), [&p_jobNameToUpdate](const ExtractionJob &job) { return job.getName() == p_jobNameToUpdate; });
-	QString strResult = "";
-	for (auto elem : it->getTicketIds())
+	//If in update mode
+	if (it != m_actualList.end())
 	{
-		if (!strResult.isEmpty())
-			strResult += ", ";
-		strResult += QString::number(elem);
+		QString strResult = "";
+		for (auto elem : it->getTicketIds())
+		{
+			if (!strResult.isEmpty())
+				strResult += ", ";
+			strResult += QString::number(elem);
+		}
+		ui.plainTextEditTicketIds->setPlainText(strResult);
 	}
-	ui.plainTextEditTicketIds->setPlainText(strResult);
 }

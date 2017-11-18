@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1088</width>
-    <height>629</height>
+    <width>879</width>
+    <height>585</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -36,43 +36,61 @@
        <number>6</number>
       </property>
       <item>
-       <widget class="QTableWidget" name="tableWidgetJobs">
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(70, 70, 70);
-color: rgb(211, 211, 211)</string>
-        </property>
-        <property name="editTriggers">
-         <set>QAbstractItemView::NoEditTriggers</set>
-        </property>
-        <property name="dragDropOverwriteMode">
-         <bool>false</bool>
-        </property>
-        <property name="selectionMode">
-         <enum>QAbstractItemView::SingleSelection</enum>
-        </property>
-        <property name="selectionBehavior">
-         <enum>QAbstractItemView::SelectRows</enum>
-        </property>
-        <attribute name="horizontalHeaderMinimumSectionSize">
-         <number>200</number>
-        </attribute>
-        <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
-         <bool>true</bool>
-        </attribute>
-        <attribute name="horizontalHeaderStretchLastSection">
-         <bool>false</bool>
-        </attribute>
-        <column>
-         <property name="text">
-          <string>Travail</string>
-         </property>
-        </column>
-        <column>
-         <property name="text">
-          <string>Nombre d'items</string>
-         </property>
-        </column>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QTableWidget" name="tableWidgetJobs">
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="dragDropOverwriteMode">
+           <bool>false</bool>
+          </property>
+          <property name="selectionMode">
+           <enum>QAbstractItemView::SingleSelection</enum>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>200</number>
+          </attribute>
+          <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>false</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Travail</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Nombre d'items</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="tableWidgetTicketsInJob">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <column>
+           <property name="text">
+            <string>Ticket dans le travail</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="QProgressBar" name="progressBarExecution">
@@ -194,7 +212,7 @@ color: rgb(255, 255, 255);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1088</width>
+     <width>879</width>
      <height>21</height>
     </rect>
    </property>
