@@ -109,6 +109,8 @@ public:
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(tableWidgetTicketsInJob->sizePolicy().hasHeightForWidth());
         tableWidgetTicketsInJob->setSizePolicy(sizePolicy);
+        tableWidgetTicketsInJob->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        tableWidgetTicketsInJob->setSelectionMode(QAbstractItemView::SingleSelection);
 
         horizontalLayout_2->addWidget(tableWidgetTicketsInJob);
 

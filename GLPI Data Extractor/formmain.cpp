@@ -38,7 +38,11 @@ void FormMain::pushButtonExecute_Click()
 {
 	QSettings settings;
 	QString glpiUrl = settings.value("GLPIUrl", "").toString();
-	QString outputFolder = settings.value("OutputFolder", "").toString();
+	QString outputFolder = settings.value("OutputFolder", "").toString().trimmed();
+	//Sanitize the output folder
+	if (outputFolder[outputFolder.size() - 1] != '\\')
+		outputFolder += '\\';
+
 	if (m_jobs.size() == 0)
 		QMessageBox::warning(this, "Erreur", QLatin1String("Il n'y a aucun travail à exécuter!"));
 	//Check if the output folder and the GLPI url has been correctly sets
@@ -48,18 +52,18 @@ void FormMain::pushButtonExecute_Click()
 		QMessageBox::critical(this, "Erreur", QLatin1String("Le dossier d'enregistrement des fichiers n'est pas configuré. Voir dans les préférences..."));
 	else
 	{
+		QString filename = outputFolder + "test.pdf";
 		//Start one thread per job to execute
 		wkhtmltopdf_init(0);
 		wkhtmltopdf_global_settings *global = wkhtmltopdf_create_global_settings();
-		wkhtmltopdf_set_global_setting(global, "out", "test.pdf");
+		wkhtmltopdf_set_global_setting(global, "out", filename.toStdString().c_str());
 		wkhtmltopdf_converter *converter = wkhtmltopdf_create_converter(global);
 		wkhtmltopdf_object_settings* object = wkhtmltopdf_create_object_settings();
-		wkhtmltopdf_set_object_setting(object, "page", "https://github.com/wkhtmltopdf/wkhtmltopdf");
+		wkhtmltopdf_set_object_setting(object, "page", "file:///C:/Temp/Ticket%20example/33599.html?_glpi_tab=-1");
 		wkhtmltopdf_add_object(converter, object, NULL);
 		wkhtmltopdf_convert(converter);
 		wkhtmltopdf_destroy_converter(converter);
 		wkhtmltopdf_deinit();
-		//ui.pushButtonExecute->setEnabled(true);
 	}
 }
 
