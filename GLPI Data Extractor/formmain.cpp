@@ -9,11 +9,12 @@
 #include <list>
 #include <qmessagebox.h>
 #include <qsettings.h>
+#include "formextract.h"
 
 using namespace std;
 
 FormMain::FormMain(QWidget *parent)
-	: QMainWindow(parent), m_jobs(list<ExtractionJob>())
+	: QMainWindow(parent), m_jobs(list<ExtractionJob>()), m_formExtract(nullptr), m_timerExtract(this)
 {
 	ui.setupUi(this);
 	ui.tableWidgetJobs->setColumnWidth(0, 200);
@@ -28,10 +29,18 @@ FormMain::FormMain(QWidget *parent)
 	connect(ui.pushButtonExecute, SIGNAL(clicked()), this, SLOT(pushButtonExecute_Click()));
 	connect(ui.action_Preferences, SIGNAL(triggered()), this, SLOT(pushButtonPreferences_Click()));
 	connect(ui.action_About, SIGNAL(triggered()), this, SLOT(pushButtonAbout_Click()));
+	connect(&m_timerExtract, SIGNAL(timeout()), this, SLOT(timerUpdate()));
+
+	m_jobs.push_back(ExtractionJob("test"));
+	m_jobs.front().addTicketId(34004);
+	m_jobs.front().addTicketId(34005);
+	refreshJobList();
 }
 
 FormMain::~FormMain()
 {
+	if (m_formExtract != nullptr)
+		delete m_formExtract;
 }
 
 void FormMain::pushButtonExecute_Click()
@@ -52,18 +61,15 @@ void FormMain::pushButtonExecute_Click()
 		QMessageBox::critical(this, "Erreur", QLatin1String("Le dossier d'enregistrement des fichiers n'est pas configuré. Voir dans les préférences..."));
 	else
 	{
-		QString filename = outputFolder + "test.pdf";
-		//Start one thread per job to execute
-		wkhtmltopdf_init(0);
-		wkhtmltopdf_global_settings *global = wkhtmltopdf_create_global_settings();
-		wkhtmltopdf_set_global_setting(global, "out", filename.toStdString().c_str());
-		wkhtmltopdf_converter *converter = wkhtmltopdf_create_converter(global);
-		wkhtmltopdf_object_settings* object = wkhtmltopdf_create_object_settings();
-		wkhtmltopdf_set_object_setting(object, "page", "file:///C:/Temp/Ticket%20example/33599.html?_glpi_tab=-1");
-		wkhtmltopdf_add_object(converter, object, NULL);
-		wkhtmltopdf_convert(converter);
-		wkhtmltopdf_destroy_converter(converter);
-		wkhtmltopdf_deinit();
+		if (m_formExtract == nullptr)
+			m_formExtract = new FormExtract();
+		if (settings.value("DisplayDebugWindow").toBool())
+			m_formExtract->show();
+		ui.labelExtractInfo->setText(QLatin1String("Préparation du navigateur..."));
+		ui.labelExtractInfo->show();
+		ui.progressBarExecution->setValue(0);
+		ui.progressBarExecution->show();
+		m_timerExtract.start(1000);
 	}
 }
 
@@ -161,4 +167,36 @@ void FormMain::pushButtonDeleteJob_Click()
 			refreshJobList();
 		}
 	}
+}
+
+void FormMain::timerUpdate()
+{
+	ui.labelExtractInfo->setText(stateToString(m_formExtract->getState()));
+	if (m_formExtract->getState() == ExtractState::LoggedIn)
+	{
+		m_formExtract->ExtractJob(m_jobs.front());
+	}
+	else if (m_formExtract->getState() == ExtractState::ExtractionJobComplete)
+	{
+		m_timerExtract.stop();
+		ui.labelExtractInfo->setText(QLatin1String("Extraction terminé!"));
+		ui.progressBarExecution->setValue(100);
+		//QMessageBox::information(this, "Information", QLatin1String("Extraction terminé!"));
+		delete m_formExtract;
+		m_formExtract = nullptr;
+	}
+}
+
+QString FormMain::stateToString(const ExtractState &p_state) const
+{
+	if (p_state == ExtractState::Undefined)
+		return "";
+	else if (p_state == ExtractState::Authentication)
+		return "Authentification";
+	else if (p_state == ExtractState::BadAuthInfo)
+		return "Mauvaise information de connexion";
+	else if (p_state == ExtractState::LoggedIn)
+		return QLatin1String("Authentifié");
+	else
+		return "";
 }

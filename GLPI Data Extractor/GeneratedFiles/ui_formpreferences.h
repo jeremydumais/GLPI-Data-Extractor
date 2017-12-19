@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
@@ -38,15 +39,16 @@ public:
     QLabel *labelGLPIAddress;
     QLineEdit *lineEditOutputFolder;
     QPushButton *pushButtonEtcFolder;
+    QCheckBox *checkBoxDebugWindow;
 
     void setupUi(QDialog *FormPreferences)
     {
         if (FormPreferences->objectName().isEmpty())
             FormPreferences->setObjectName(QStringLiteral("FormPreferences"));
-        FormPreferences->resize(602, 300);
+        FormPreferences->resize(610, 347);
         horizontalLayoutWidget = new QWidget(FormPreferences);
         horizontalLayoutWidget->setObjectName(QStringLiteral("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(10, 240, 581, 51));
+        horizontalLayoutWidget->setGeometry(QRect(10, 290, 581, 51));
         horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
@@ -84,19 +86,25 @@ public:
         labelTitle->setAlignment(Qt::AlignCenter);
         labelOutputFolder = new QLabel(FormPreferences);
         labelOutputFolder->setObjectName(QStringLiteral("labelOutputFolder"));
-        labelOutputFolder->setGeometry(QRect(18, 121, 176, 20));
+        labelOutputFolder->setGeometry(QRect(10, 121, 191, 20));
         lineEditGLPIAddress = new QLineEdit(FormPreferences);
         lineEditGLPIAddress->setObjectName(QStringLiteral("lineEditGLPIAddress"));
         lineEditGLPIAddress->setGeometry(QRect(200, 85, 381, 20));
         labelGLPIAddress = new QLabel(FormPreferences);
         labelGLPIAddress->setObjectName(QStringLiteral("labelGLPIAddress"));
-        labelGLPIAddress->setGeometry(QRect(18, 85, 152, 20));
+        labelGLPIAddress->setGeometry(QRect(42, 85, 150, 20));
         lineEditOutputFolder = new QLineEdit(FormPreferences);
         lineEditOutputFolder->setObjectName(QStringLiteral("lineEditOutputFolder"));
         lineEditOutputFolder->setGeometry(QRect(200, 121, 351, 20));
         pushButtonEtcFolder = new QPushButton(FormPreferences);
         pushButtonEtcFolder->setObjectName(QStringLiteral("pushButtonEtcFolder"));
         pushButtonEtcFolder->setGeometry(QRect(550, 120, 31, 22));
+        checkBoxDebugWindow = new QCheckBox(FormPreferences);
+        checkBoxDebugWindow->setObjectName(QStringLiteral("checkBoxDebugWindow"));
+        checkBoxDebugWindow->setGeometry(QRect(12, 154, 201, 20));
+        checkBoxDebugWindow->setLayoutDirection(Qt::RightToLeft);
+        checkBoxDebugWindow->setAutoFillBackground(true);
+        checkBoxDebugWindow->setChecked(false);
 
         retranslateUi(FormPreferences);
         QObject::connect(pushButtonCancel, SIGNAL(clicked()), FormPreferences, SLOT(reject()));
@@ -110,9 +118,10 @@ public:
         pushButtonOK->setText(QApplication::translate("FormPreferences", "&OK", Q_NULLPTR));
         pushButtonCancel->setText(QApplication::translate("FormPreferences", "&Annuler", Q_NULLPTR));
         labelTitle->setText(QApplication::translate("FormPreferences", "Pr\303\251f\303\251rences", Q_NULLPTR));
-        labelOutputFolder->setText(QApplication::translate("FormPreferences", "Dossier d'enregistrement des fichiers", Q_NULLPTR));
+        labelOutputFolder->setText(QApplication::translate("FormPreferences", "Dossier d'enregistrement des fichiers :", Q_NULLPTR));
         labelGLPIAddress->setText(QApplication::translate("FormPreferences", "Adresse web du syst\303\250me GLPI :", Q_NULLPTR));
         pushButtonEtcFolder->setText(QApplication::translate("FormPreferences", "...", Q_NULLPTR));
+        checkBoxDebugWindow->setText(QApplication::translate("FormPreferences", "Afficher la fen\303\252tre de d\303\251bogage :", Q_NULLPTR));
     } // retranslateUi
 
 };

@@ -80,6 +80,18 @@
     <ClCompile Include="GeneratedFiles\Release\moc_formpreferences.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_formextract.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_formextract.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="formextract.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_style.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="formmain.h">
@@ -112,6 +124,15 @@
     <CustomBuild Include="formpreferences.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="formextract.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="formextract.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="qdarkstyle\style.qrc">
+      <Filter>Resource Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_formmain.h">
@@ -132,6 +153,12 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_formextract.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="extractState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="GLPI Data Extractor.rc" />
@@ -139,9 +166,126 @@
   <ItemGroup>
     <Image Include="GLPI Data Extractor.ico" />
     <Image Include="icon1.ico" />
+    <Image Include="qdarkstyle\rc\up_arrow_disabled.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\Hmovetoolbar.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\stylesheet-branch-end.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\branch_closed-on.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\stylesheet-vline.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\branch_closed.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\branch_open-on.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\transparent.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\right_arrow_disabled.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\sizegrip.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\close.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\close-hover.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\close-pressed.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\down_arrow.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\Vmovetoolbar.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\left_arrow.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\stylesheet-branch-more.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\up_arrow.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\right_arrow.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\left_arrow_disabled.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\Hsepartoolbar.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\branch_open.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\Vsepartoolbar.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\down_arrow_disabled.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\undock.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\checkbox_checked_disabled.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\checkbox_checked_focus.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\checkbox_checked.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\checkbox_indeterminate.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\checkbox_indeterminate_focus.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\checkbox_unchecked_disabled.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\checkbox_unchecked_focus.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\checkbox_unchecked.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\radio_checked_disabled.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\radio_checked_focus.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\radio_checked.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\radio_unchecked_disabled.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\radio_unchecked_focus.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="qdarkstyle\rc\radio_unchecked.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
-    <None Include="default.qss">
+    <None Include="qdarkstyle\style.qss">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

@@ -63,7 +63,7 @@ size_t ExtractionJob::getTicketsCount() const
 	return m_ticketIds.size();
 }
 
-void ExtractionJob::addTicketId(unsigned int p_ticketId)
+void ExtractionJob::addTicketId(size_t p_ticketId)
 {
 	//Check if the ticket not already exist
 	if (find(m_ticketIds.begin(), m_ticketIds.end(), p_ticketId) != m_ticketIds.end())
@@ -71,12 +71,13 @@ void ExtractionJob::addTicketId(unsigned int p_ticketId)
 	m_ticketIds.push_back(p_ticketId);
 }
 
-void ExtractionJob::removeTicketId(unsigned int p_ticketId)
+void ExtractionJob::removeTicketId(size_t p_ticketId)
 {
 	//Check if the ticket already exist
-	if (find(m_ticketIds.begin(), m_ticketIds.end(), p_ticketId) == m_ticketIds.end())
+	std::vector<size_t>::iterator ticketIter = find(m_ticketIds.begin(), m_ticketIds.end(), p_ticketId);
+	if (ticketIter == m_ticketIds.end())
 		throw invalid_argument("p_ticketId cannot be found in the list");
-	m_ticketIds.remove(p_ticketId);
+	m_ticketIds.erase(ticketIter);
 }
 
 void ExtractionJob::clearTickets()
@@ -84,12 +85,12 @@ void ExtractionJob::clearTickets()
 	m_ticketIds.clear();
 }
 
-const list<unsigned int> ExtractionJob::getTicketIds() const
+const vector<size_t> ExtractionJob::getTicketIds() const
 {
 	return m_ticketIds;
 }
 
-void ExtractionJob::setTicketIds(const std::list<unsigned int> &p_ticketIds)
+void ExtractionJob::setTicketIds(const std::vector<size_t> &p_ticketIds)
 {
 	m_ticketIds = p_ticketIds;
 }

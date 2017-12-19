@@ -11,7 +11,6 @@ class FormPreferences : public QDialog
 public:
 	FormPreferences(QWidget *parent = 0);
 	~FormPreferences();
-
 private:
 	Ui::FormPreferences ui;
 
@@ -19,6 +18,7 @@ private slots:
 	void showEvent(QShowEvent* event);
 	void pushButtonOK_Click();
 	void pushButtonEtcFolder_Click();
+	void loadfinished(bool ok);
 };
 
 #endif // FORMPREFERENCES_H

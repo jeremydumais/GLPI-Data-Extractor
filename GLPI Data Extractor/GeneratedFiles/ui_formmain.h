@@ -41,6 +41,7 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QTableWidget *tableWidgetJobs;
     QTableWidget *tableWidgetTicketsInJob;
+    QLabel *labelExtractInfo;
     QProgressBar *progressBarExecution;
     QHBoxLayout *horizontalLayout;
     QPushButton *pushButton_AddJob;
@@ -117,9 +118,18 @@ public:
 
         verticalLayout->addLayout(horizontalLayout_2);
 
+        labelExtractInfo = new QLabel(centralWidget);
+        labelExtractInfo->setObjectName(QStringLiteral("labelExtractInfo"));
+        labelExtractInfo->setAlignment(Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter);
+        labelExtractInfo->setMargin(5);
+        labelExtractInfo->setIndent(5);
+
+        verticalLayout->addWidget(labelExtractInfo);
+
         progressBarExecution = new QProgressBar(centralWidget);
         progressBarExecution->setObjectName(QStringLiteral("progressBarExecution"));
         progressBarExecution->setValue(24);
+        progressBarExecution->setTextVisible(true);
         progressBarExecution->setInvertedAppearance(false);
 
         verticalLayout->addWidget(progressBarExecution);
@@ -220,6 +230,7 @@ public:
         ___qtablewidgetitem1->setText(QApplication::translate("FormMainClass", "Nombre d'items", Q_NULLPTR));
         QTableWidgetItem *___qtablewidgetitem2 = tableWidgetTicketsInJob->horizontalHeaderItem(0);
         ___qtablewidgetitem2->setText(QApplication::translate("FormMainClass", "Ticket dans le travail", Q_NULLPTR));
+        labelExtractInfo->setText(QString());
         pushButton_AddJob->setText(QApplication::translate("FormMainClass", "Ajouter", Q_NULLPTR));
         pushButton_UpdateJob->setText(QApplication::translate("FormMainClass", "Modifier", Q_NULLPTR));
         pushButton_DeleteJob->setText(QApplication::translate("FormMainClass", "Supprimer", Q_NULLPTR));

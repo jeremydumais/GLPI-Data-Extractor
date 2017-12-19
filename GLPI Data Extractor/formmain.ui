@@ -99,9 +99,28 @@
        </layout>
       </item>
       <item>
+       <widget class="QLabel" name="labelExtractInfo">
+        <property name="text">
+         <string/>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+        <property name="margin">
+         <number>5</number>
+        </property>
+        <property name="indent">
+         <number>5</number>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QProgressBar" name="progressBarExecution">
         <property name="value">
          <number>24</number>
+        </property>
+        <property name="textVisible">
+         <bool>true</bool>
         </property>
         <property name="invertedAppearance">
          <bool>false</bool>

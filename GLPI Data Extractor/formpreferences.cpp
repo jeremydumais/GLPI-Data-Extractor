@@ -22,6 +22,7 @@ void FormPreferences::showEvent(QShowEvent* event)
 	QSettings settings;
 	ui.lineEditGLPIAddress->setText(settings.value("GLPIUrl", "").toString());
 	ui.lineEditOutputFolder->setText(settings.value("OutputFolder", "").toString());
+	ui.checkBoxDebugWindow->setChecked(settings.value("DisplayDebugWindow", false).toBool());
 }
 
 void FormPreferences::pushButtonOK_Click()
@@ -38,8 +39,13 @@ void FormPreferences::pushButtonOK_Click()
 		QSettings settings;
 		settings.setValue("GLPIUrl", ui.lineEditGLPIAddress->text());
 		settings.setValue("OutputFolder", ui.lineEditOutputFolder->text());
+		settings.setValue("DisplayDebugWindow", ui.checkBoxDebugWindow->isChecked());
 		accept();
 	}
+}
+
+void FormPreferences::loadfinished(bool ok)
+{
 }
 
 void FormPreferences::pushButtonEtcFolder_Click()

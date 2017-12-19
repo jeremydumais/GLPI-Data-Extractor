@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>602</width>
-    <height>300</height>
+    <width>610</width>
+    <height>347</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>240</y>
+     <y>290</y>
      <width>581</width>
      <height>51</height>
     </rect>
@@ -91,14 +91,14 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="labelOutputFolder">
    <property name="geometry">
     <rect>
-     <x>18</x>
+     <x>10</x>
      <y>121</y>
-     <width>176</width>
+     <width>191</width>
      <height>20</height>
     </rect>
    </property>
    <property name="text">
-    <string>Dossier d'enregistrement des fichiers</string>
+    <string>Dossier d'enregistrement des fichiers :</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEditGLPIAddress">
@@ -114,9 +114,9 @@ color: rgb(255, 255, 255);</string>
   <widget class="QLabel" name="labelGLPIAddress">
    <property name="geometry">
     <rect>
-     <x>18</x>
+     <x>42</x>
      <y>85</y>
-     <width>152</width>
+     <width>150</width>
      <height>20</height>
     </rect>
    </property>
@@ -145,6 +145,28 @@ color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
     <string>...</string>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="checkBoxDebugWindow">
+   <property name="geometry">
+    <rect>
+     <x>12</x>
+     <y>154</y>
+     <width>201</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::RightToLeft</enum>
+   </property>
+   <property name="autoFillBackground">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Afficher la fenêtre de débogage :</string>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
    </property>
   </widget>
  </widget>

@@ -12,11 +12,16 @@ int main(int argc, char *argv[])
 	
 	FormMain w;
 	w.show(); 
-	QFile file("default.qss");
-	if (file.open(QFile::ReadOnly))
+	QFile file("qdarkstyle/style.qss");
+	if (!file.exists())
 	{
-		QString styleSheet(file.readAll());
-		a.setStyleSheet(styleSheet);
+		printf("Unable to set stylesheet, file not found\n");
+	}
+	else
+	{
+		file.open(QFile::ReadOnly | QFile::Text);
+		QTextStream ts(&file);
+		qApp->setStyleSheet(ts.readAll());
 	}
 	return a.exec();
 }
